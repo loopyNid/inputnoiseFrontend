@@ -4,8 +4,8 @@ const flock = [];
 console.log("i am alive");
 function setup() {
     var audioCtx = getAudioContext();
-    var myMediaElement = document.getElementById('my-stream');
-    var source = audioCtx.createMediaElementSource(myMediaElement);
+    var streamEl = document.getElementById('my-stream');
+    var source = audioCtx.createMediaElementSource(streamEl);
     source.connect(p5.soundOut);
     fft = new p5.FFT(0, 1024);
     source.connect(audioCtx.destination);
@@ -23,4 +23,11 @@ function draw() {
         ampFreq = map(spectrum[i], 0, 255, 0, 1);
         ellipse(width * index,random(height),100 * ampFreq, 100 * ampFreq);
     }
+}
+
+function startNoise() {
+    var streamEl = document.getElementById('my-stream');
+    var intro = document.getElementById('intro');
+    intro.style.display = "none";
+    streamEl.play();
 }
